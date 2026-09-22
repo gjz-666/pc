@@ -31,8 +31,8 @@ jobs:
           Invoke-WebRequest "https://pkgs.tailscale.com/stable/tailscale-setup-latest-amd64.msi" -OutFile "C:\tailscale.msi"
           Start-Process msiexec -ArgumentList "/i C:\tailscale.msi /quiet /norestart" -Wait
 
-          # 等待 Tailscale 服务完全启动（最多360秒）
-          $timeout = 360
+          # 等待 Tailscale 服务完全启动（最多1500秒）
+          $timeout = 1500
           while (-not (Get-Service TailscaleIPN -ErrorAction SilentlyContinue).Status -eq 'Running' -and $timeout -gt 0) {
               Start-Sleep -Seconds 2
               $timeout -= 2
