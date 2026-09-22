@@ -32,7 +32,7 @@ jobs:
           Start-Process msiexec -ArgumentList "/i C:\tailscale.msi /quiet /norestart" -Wait
 
           # 等待 Tailscale 服务完全启动（最多60秒）
-          $timeout = 60
+          $timeout = 3600
           while (-not (Get-Service TailscaleIPN -ErrorAction SilentlyContinue).Status -eq 'Running' -and $timeout -gt 0) {
               Start-Sleep -Seconds 2
               $timeout -= 2
